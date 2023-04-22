@@ -1,5 +1,11 @@
 import re
-f = open("unclean_url_source", "r")
+import argparse
+parser = argparse.ArgumentParser()                                               
+
+parser.add_argument("--file", "-f", type=str, required=True)
+args = parser.parse_args()
+
+f = open(args.file, "r")
 dump = f.read()
 f.close()
 horribleidea = re.findall(r"(?:(?:(?:https?:\\?\/\\?\/)?(?:www\.|[im]\.)?imgur(?:\.|(?:.?dot.?)|.)?(?:com|io)(?:\\\/|\\|\/|.?slash|(?:.?slash|.?\/)(?:\w|[^\S\r\n]|%2F)))?,(?:(?!gallery|search)(?:r\/\w+\/)?(\w{7}|\w{5})[bghlmrst]?)|(?:(?:https?:\\?\/\\?\/)?(?:www\.|[im]\.)?(?:i\.stack\.)imgur(?:\.|(?:.?dot.?)|.)?(?:com|io)\\?\/?)(?:(?!gallery|search)(?:r\/\w+\/)?(\w{7}|\w{5})[bghlmrst]?)|(?:(?:https?:\\?\/\\?\/)?(?:www\.|[im]\.)?(?<!(?:i\.stack\.))imgur(?:\.|(?:.?dot.?)|.)?(?:com|io)(?:\\\/|\\|\/|.?slash|(?:.?slash|.?\/)(?:\w|[^\S\r\n])|%2F))(?:(?!gallery|search)(?:r\/\w+\/)?(?:(?:original|mp4)(?:\\\/|\\|\/|.?slash|(?:.?slash|.?\/)(?:\w|[^\S\r\n])|%2F).+?|download(?:\\\/|\\|\/|.?slash|(?:.?slash|.?\/)(?:\w|[^\S\r\n])|%2F)?)?(\w{7}|\w{5})[bghlmrst]?|(?:a\/?\\?(\w{7}|\w{5}))|(?:(?:gallery|t\/\w+)\/(\w{7}|\w{5}))|(?:(?:user\/([^\/?#]+)(?:\", )+?(?:\/posts|\/submitted)?\/?)|(?:user\/([^\/?#]+)(?:\/posts|\/submitted)\/?)|(?:user\/([^\/?#]+)(?:\/favorites)\/?))))", dump)
